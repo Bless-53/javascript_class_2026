@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    #parent{
+        height: 200px;
+        width: 200px;
+        border: solid red;
+        display: flex;
+    }
+
+    #child{
+        height: 100px;
+        width: 100px;
+        border: solid red;
+        align-self: center;
+    }
+
+
+</style>
+
+<body>
+    
+    <div id="parent">
+        Parent
+        <div id="child">
+            Child
+        </div>
+    </div>
+
+
+    <script>
+        parentEle = document.getElementById('parent')
+        childEle = document.getElementById('child')
+
+        //Stop Propagation of events from child to parent
+        parentEle.addEventListener('click', function(){
+            console.log("Parent Element Clicked!")
+        })
+
+        childEle.addEventListener('click', function(event){
+            console.log("Child Element Clicked!")
+            event.stopPropagation()
+        })
+
+
+        // Propagation of events from parent to child in capturing phase
+        parentEle.addEventListener('click', function(){
+            console.log("Parent Element Clicked!")
+        }, true)
+
+        childEle.addEventListener('click', function(event){
+            console.log("Child Element Clicked!")
+            event.stopPropagation()
+        }, true)
+
+
+        // Propagation of events from child to parent in bubbling phase
+        parentEle.addEventListener('click', function(){
+            console.log("Parent Element Clicked!")
+        })
+
+        childEle.addEventListener('click', function(){
+            console.log("Child Element Clicked!")
+        })
+
+
+    </script>
+</body>
+</html>
